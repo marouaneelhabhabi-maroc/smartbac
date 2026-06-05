@@ -400,6 +400,61 @@ body{display:flex;min-height:100vh;overflow-x:hidden}
   .grid-2{grid-template-columns:1fr}
   .page{padding:16px 16px 60px}
 }
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#F59E0B;--gold2:#FBBF24;--gold3:#FCD34D;
+  --bg0:#020617;--bg1:#071226;--bg2:#0B1220;
+  --surface1:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.07);--surface3:rgba(255,255,255,0.11);
+  --border1:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
+  --text1:#F8FAFC;--text2:#94A3B8;--text3:#475569;
+  --blue:#3B82F6;--purple:#8B5CF6;--emerald:#10B981;--rose:#F43F5E;--cyan:#06B6D4;--orange:#F97316;
+}
+body{font-family:'Cairo',sans-serif;background:var(--bg0);color:var(--text1);padding:20px;min-height:100vh}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;cursor:pointer;transition:all .2s;position:relative;color:var(--text2);font-size:13.5px;font-weight:500;margin-bottom:2px;user-select:none}
+.nav-item:hover{background:var(--surface1);color:var(--text1)}
+.nav-item.active{background:rgba(245,158,11,0.12);color:var(--gold2)}
+.nav-item.active::before{content:'';position:absolute;right:0;top:20%;bottom:20%;width:3px;background:linear-gradient(var(--gold),var(--gold2));border-radius:4px 0 0 4px}
+.nav-icon{width:34px;height:34px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;border-radius:8px}
+.nav-item.active .nav-icon{background:rgba(245,158,11,0.15)}
+.nav-text{flex:1;white-space:nowrap}
+.nav-chevron{font-size:11px;color:var(--text3);transition:transform .3s cubic-bezier(.4,0,.2,1);width:16px;height:16px;display:flex;align-items:center;justify-content:center}
+.nav-item.open .nav-chevron{transform:rotate(90deg)}
+.nav-item.open{background:var(--surface1);color:var(--text1)}
+.dropdown-panel{overflow:hidden;max-height:0;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease;opacity:0}
+.dropdown-panel.open{max-height:600px;opacity:1}
+.sub-items{margin:4px 0 6px 0;padding-right:12px;border-right:2px solid var(--border1);margin-right:16px}
+.sub-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;transition:all .2s;color:var(--text2);font-size:12.5px;font-weight:500;margin-bottom:2px;position:relative}
+.sub-item:hover{background:var(--surface1);color:var(--text1)}
+.sub-item-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sub-item-label{flex:1}
+.sub-item-tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap}
+.sub-item-count{font-size:10px;color:var(--text3);background:var(--surface2);padding:2px 7px;border-radius:20px;font-weight:600}
+.sub-divider{height:1px;background:var(--border1);margin:6px 0}
+.sub-section-label{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;padding:6px 12px 3px}
+.nav-section{padding:4px 0}
+.tag-orange{background:rgba(249,115,22,.12);color:#FB923C}
+.tag-emerald{background:rgba(16,185,129,.12);color:#34D399}
+.tag-purple{background:rgba(139,92,246,.12);color:#A78BFA}
+.tag-blue{background:rgba(59,130,246,.12);color:#60A5FA}
+.tag-gold{background:rgba(245,158,11,.12);color:var(--gold2)}
+.dot-orange{background:#F97316}
+.dot-emerald{background:#10B981}
+.dot-purple{background:#8B5CF6}
+.dot-blue{background:#3B82F6}
+.dot-gold{background:var(--gold)}
+
+
+
+
+
+
+  
 </style>
 </head>
 <body>
@@ -421,10 +476,54 @@ body{display:flex;min-height:100vh;overflow-x:hidden}
         <div class="nav-icon">🏠</div>
         <span class="nav-text">الرئيسية</span>
       </div>
-      <div class="nav-item" onclick="setActive(this)">
-        <div class="nav-icon">📚</div>
-        <span class="nav-text">أولى باكـ</span>
+
+
+      <div class="nav-section">
+  <div class="nav-item" id="nav-ola" onclick="toggleDropdown('ola')">
+    <div class="nav-icon">📚</div>
+    <span class="nav-text">أولى باكـ</span>
+    <span class="nav-chevron">›</span>
+  </div>
+
+  <div class="dropdown-panel" id="dropdown-ola">
+    <div class="sub-items">
+
+      <div class="sub-section-label">📂 المواد الدراسية</div>
+
+      <div class="sub-item" onclick="handleClick(this,'اللغة العربية')">
+        <div class="sub-item-dot dot-orange"></div>
+        <span class="sub-item-label">اللغة العربية وآدابها</span>
+        <span class="sub-item-tag tag-orange">أدبي</span>
       </div>
+
+      <div class="sub-item" onclick="handleClick(this,'التربية الإسلامية')">
+        <div class="sub-item-dot dot-gold"></div>
+        <span class="sub-item-label">التربية الإسلامية</span>
+        <span class="sub-item-tag tag-gold">ديني</span>
+      </div>
+
+      <div class="sub-item" onclick="handleClick(this,'اللغة الفرنسية')">
+        <div class="sub-item-dot dot-purple"></div>
+        <span class="sub-item-label">اللغة الفرنسية</span>
+        <span class="sub-item-tag tag-purple">لغوي</span>
+      </div>
+
+      <div class="sub-item" onclick="handleClick(this,'الاجتماعيات')">
+        <div class="sub-item-dot dot-blue"></div>
+        <span class="sub-item-label">الاجتماعيات</span>
+        <span class="sub-item-tag tag-blue">إنساني</span>
+      </div>
+
+      <div class="sub-item" onclick="handleClick(this,'الرياضيات')">
+        <div class="sub-item-dot dot-emerald"></div>
+        <span class="sub-item-label">الرياضيات</span>
+        <span class="sub-item-tag tag-emerald">علمي</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+      
       <div class="nav-item" onclick="setActive(this)">
         <div class="nav-icon">🎓</div>
         <span class="nav-text">ثانية باكـ</span>
@@ -436,6 +535,10 @@ body{display:flex;min-height:100vh;overflow-x:hidden}
       <div class="nav-item" onclick="setActive(this)">
         <div class="nav-icon">🤔</div>
         <span class="nav-text">نصائح</span>
+      </div>
+      <div class="nav-item" onclick="setActive(this)">
+        <div class="nav-icon">🗨️</div>
+        <span class="nav-text">الدردشة</span>
       </div>
     </div>
     <div class="nav-section">
@@ -977,6 +1080,29 @@ setTimeout(()=>{
   }
 },300);
 
+
+
+
+
+
+
+function toggleDropdown(id){
+  const nav=document.getElementById('nav-'+id);
+  const panel=document.getElementById('dropdown-'+id);
+  const isOpen=panel.classList.contains('open');
+  document.querySelectorAll('.dropdown-panel').forEach(p=>p.classList.remove('open'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('open','active'));
+  if(!isOpen){panel.classList.add('open');nav.classList.add('open','active')}
+}
+function handleClick(el,name){
+  document.querySelectorAll('.sub-item').forEach(s=>{s.style.background='';s.style.color=''});
+  el.style.background='rgba(245,158,11,0.08)';
+  el.style.color='var(--gold2)';
+}
+toggleDropdown('ola');
+
+
+  
 // Counter animations
 function animateNum(el,target,duration=1500,suffix=''){
   const start=performance.now();
