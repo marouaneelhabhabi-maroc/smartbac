@@ -23,7 +23,7 @@ body{display:flex;min-height:100vh;overflow-x:hidden}
 
 /* SIDEBAR */
 .sidebar{
-  width:240px;min-width:240px;background:var(--bg1);
+  width:280px;min-width:240px;background:var(--bg1);
   border-left:1px solid var(--border1);
   display:flex;flex-direction:column;
   position:fixed;right:0;top:0;bottom:0;z-index:100;
@@ -426,7 +426,14 @@ body{font-family:'Cairo',sans-serif;background:var(--bg0);color:var(--text1);pad
 .nav-chevron{font-size:11px;color:var(--text3);transition:transform .3s cubic-bezier(.4,0,.2,1);width:16px;height:16px;display:flex;align-items:center;justify-content:center}
 .nav-item.open .nav-chevron{transform:rotate(90deg)}
 .nav-item.open{background:var(--surface1);color:var(--text1)}
+
 .dropdown-panel{overflow:hidden;max-height:0;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease;opacity:0}
+.nested-dropdown{
+  margin-right:20px;
+  margin-top:8px;
+  border-right:2px solid rgba(255,255,255,.08);
+  padding-right:10px;
+}
 .dropdown-panel.open{max-height:600px;opacity:1}
 .sub-items{margin:4px 0 6px 0;padding-right:12px;border-right:2px solid var(--border1);margin-right:16px}
 .sub-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;transition:all .2s;color:var(--text2);font-size:12.5px;font-weight:500;margin-bottom:2px;position:relative}
@@ -450,7 +457,36 @@ body{font-family:'Cairo',sans-serif;background:var(--bg0);color:var(--text1);pad
 .dot-gold{background:var(--gold)}
 
 
+.tag-rose{
+  background:rgba(244,63,94,.12);
+  color:#FB7185;
+}
 
+.tag-cyan{
+  background:rgba(6,182,212,.12);
+  color:#22D3EE;
+}
+
+
+
+.sub-item.has-dropdown{
+    position: relative;
+}
+
+.sub-item.has-dropdown::after{
+    content:'›';
+    margin-right:auto;
+    color:var(--text3);
+    font-size:12px;
+}
+
+.dot-rose{
+  background:#F43F5E;
+}
+
+.dot-cyan{
+  background:#06B6D4;
+}
 
 
 
@@ -488,46 +524,396 @@ body{font-family:'Cairo',sans-serif;background:var(--bg0);color:var(--text1);pad
   <div class="dropdown-panel" id="dropdown-ola">
     <div class="sub-items">
 
-      <div class="sub-section-label">📂 المواد الدراسية</div>
 
-      <div class="sub-item" onclick="handleClick(this,'المواد')">
-        <div class="sub-item-dot dot-orange"></div>
-        <span class="sub-item-label">المواد</span>
-        <span class="sub-item-tag tag-orange">أدبي</span>
-      </div>
+<div class="sub-item has-dropdown"
+     onclick="event.stopPropagation();toggleDropdown('oula-bac-subjects')">  <div class="sub-item-dot dot-blue"></div>
+  <span class="sub-item-label">المواد</span>
+  <span class="sub-item-tag tag-blue">5 مواد</span>
+</div>
 
-      <div class="sub-item" onclick="handleClick(this,'الفروض')">
-        <div class="sub-item-dot dot-gold"></div>
-        <span class="sub-item-label">الفروض</span>
-        <span class="sub-item-tag tag-gold">ديني</span>
-      </div>
+<div class="dropdown-panel nested-dropdown" id="dropdown-oula-bac-subjects">
+  <div class="sub-items">
 
-      <div class="sub-item" onclick="handleClick(this,'الإمتحانات الجهوية')">
-        <div class="sub-item-dot dot-purple"></div>
-        <span class="sub-item-label">الإمتحانات الجهوية</span>
-        <span class="sub-item-tag tag-purple">لغوي</span>
-      </div>
+    <div class="sub-item" onclick="handleClick(this,'اللغة الفرنسية')">
+      <div class="sub-item-dot dot-blue"></div>
+      <span class="sub-item-label">اللغة الفرنسية</span>
+    </div>
 
-      <div class="sub-item" onclick="handleClick(this,'مجتمع التلاميذ')">
-        <div class="sub-item-dot dot-blue"></div>
-        <span class="sub-item-label">مجتمع التلاميذ</span>
-        <span class="sub-item-tag tag-blue">إنساني</span>
-      </div>
+    <div class="sub-item" onclick="handleClick(this,'اللغة العربية')">
+      <div class="sub-item-dot dot-emerald"></div>
+      <span class="sub-item-label">اللغة العربية</span>
+    </div>
 
+    <div class="sub-item" onclick="handleClick(this,'الإجتماعيات')">
+      <div class="sub-item-dot dot-cyan"></div>
+      <span class="sub-item-label">الإجتماعيات</span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'التربية الإسلامية')">
+      <div class="sub-item-dot dot-gold"></div>
+      <span class="sub-item-label">التربية الإسلامية</span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'الرياضيات')">
+      <div class="sub-item-dot dot-purple"></div>
+      <span class="sub-item-label">الرياضيات</span>
+    </div>
+
+  </div>
+</div>
+
+<div class="sub-item has-dropdown"
+     onclick="event.stopPropagation();toggleDropdown('forod-oula')">
+  <div class="sub-item-dot dot-gold"></div>
+  <span class="sub-item-label">الفروض</span>
+  <span class="sub-item-tag tag-gold">فروض</span>
+</div>
+
+<div class="dropdown-panel nested-dropdown" id="dropdown-forod-oula">
+  <div class="sub-items">
+
+    <div class="sub-item" onclick="handleClick(this,'الدورة الأولى')">
+      <div class="sub-item-dot dot-blue"></div>
+      <span class="sub-item-label">الدورة الأولى</span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'الدورة الثانية')">
+      <div class="sub-item-dot dot-purple"></div>
+      <span class="sub-item-label">الدورة الثانية</span>
+    </div>
+
+  </div>
+</div>
+
+<div class="sub-item has-dropdown"
+     onclick="event.stopPropagation();toggleDropdown('jihawi-oula')">
+  <div class="sub-item-dot dot-purple"></div>
+  <span class="sub-item-label">الإمتحانات الجهوية</span>
+  <span class="sub-item-tag tag-purple">جهوي</span>
+</div>
+
+<div class="dropdown-panel nested-dropdown" id="dropdown-jihawi-oula">
+  <div class="sub-items">
+
+    <div class="sub-item" onclick="handleClick(this,'امتحانات اللغة الفرنسية')">
+      <div class="sub-item-dot dot-blue"></div>
+      <span class="sub-item-label">امتحانات اللغة الفرنسية</span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'امتحانات اللغة العربية')">
+      <div class="sub-item-dot dot-emerald"></div>
+      <span class="sub-item-label">امتحانات اللغة العربية</span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'امتحانات الإجتماعيات')">
+      <div class="sub-item-dot dot-cyan"></div>
+      <span class="sub-item-label">امتحانات الإجتماعيات</span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'امتحانات التربية الإسلامية')">
+      <div class="sub-item-dot dot-gold"></div>
+      <span class="sub-item-label">امتحانات التربية الإسلامية</span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'امتحانات الرياضيات')">
+      <div class="sub-item-dot dot-purple"></div>
+      <span class="sub-item-label">امتحانات الرياضيات</span>
+    </div>
+
+  </div>
+</div>
+
+<div class="sub-item has-dropdown"
+     onclick="event.stopPropagation();toggleDropdown('mojtamaa-oula')">
+  <div class="sub-item-dot dot-blue"></div>
+  <span class="sub-item-label">مجتمع التلاميذ</span>
+  <span class="sub-item-tag tag-blue">مجتمع</span>
+</div>
+
+<div class="dropdown-panel nested-dropdown" id="dropdown-mojtamaa-oula">
+  <div class="sub-items">
+
+    <div class="sub-item" onclick="handleClick(this,'إضافة الدروس')">
+      <div class="sub-item-dot dot-emerald"></div>
+      <span class="sub-item-label">إضافة الدروس</span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'أسئلتكم')">
+      <div class="sub-item-dot dot-purple"></div>
+      <span class="sub-item-label">أسئلتكم</span>
+    </div>
+
+  </div>
+</div>
 
 
     </div>
   </div>
 </div>
       
-      <div class="nav-item" onclick="setActive(this)">
-        <div class="nav-icon">🎓</div>
-        <span class="nav-text">ثانية باكـ</span>
+<!-- ثانية باكـ -->
+<div class="nav-section">
+  <div class="nav-item" id="nav-tania" onclick="toggleDropdown('tania')">
+    <div class="nav-icon">🎓</div>
+    <span class="nav-text">ثانية باكـ</span>
+    <span class="nav-chevron">›</span>
+  </div>
+
+  <div class="dropdown-panel" id="dropdown-tania">
+    <div class="sub-items">
+<div class="sub-item" onclick="event.stopPropagation();toggleDropdown('tania-bac-subjects')">
+  <div class="sub-item-dot dot-emerald"></div>
+  <span class="sub-item-label">المواد</span>
+  <span class="sub-item-tag tag-emerald">5 مواد</span>
+</div>
+
+<div class="dropdown-panel nested-dropdown" id="dropdown-tania-bac-subjects">
+  <div class="sub-items">
+
+    <div class="sub-item" onclick="handleClick(this,'اللغة الفرنسية')">
+      <div class="sub-item-dot dot-blue"></div>
+      <span class="sub-item-label">الرياضيات </span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'اللغة العربية')">
+      <div class="sub-item-dot dot-emerald"></div>
+      <span class="sub-item-label">الفيزياء والكيمياء </span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'الفلسفة')">
+      <div class="sub-item-dot dot-purple"></div>
+      <span class="sub-item-label">الفلسفة</span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'الإنجليزية')">
+      <div class="sub-item-dot dot-rose"></div>
+      <span class="sub-item-label">الإنجليزية</span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'الرياضيات')">
+      <div class="sub-item-dot dot-gold"></div>
+      <span class="sub-item-label">علوم الحياة والأرض </span>
+    </div>
+
+  </div>
+</div>
+
+<div class="sub-item has-dropdown"
+     onclick="event.stopPropagation();toggleDropdown('forod-tania')">
+  <div class="sub-item-dot dot-gold"></div>
+  <span class="sub-item-label">الفروض</span>
+  <span class="sub-item-tag tag-gold">فروض</span>
+</div>
+
+<div class="dropdown-panel nested-dropdown" id="dropdown-forod-tania">
+  <div class="sub-items">
+
+    <div class="sub-item" onclick="handleClick(this,'الدورة الأولى ')">
+      <div class="sub-item-dot dot-emerald"></div>
+      <span class="sub-item-label">الدورة الأولى </span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'الدورة الثانية')">
+      <div class="sub-item-dot dot-purple"></div>
+      <span class="sub-item-label">الدورة الثانية</span>
+    </div>
+
+  </div>
+</div>
+
+<div class="sub-item has-dropdown"
+     onclick="event.stopPropagation();toggleDropdown('nat-wataniya-tania')">
+
+  <div class="sub-item-dot dot-rose"></div>
+  <span class="sub-item-label">الامتحانات الوطنية</span>
+  <span class="sub-item-tag tag-rose">وطني</span>
+</div>
+
+<div class="dropdown-panel nested-dropdown" id="dropdown-nat-wataniya-tania">
+  <div class="sub-items">
+
+    <!-- علوم فيزيائية -->
+    <div class="sub-item has-dropdown"
+         onclick="event.stopPropagation();toggleDropdown('physique-watani')">
+
+      <div class="sub-item-dot dot-blue"></div>
+      <span class="sub-item-label">شعبة العلوم الفيزيائية</span>
+      <span class="sub-item-tag tag-blue">PC</span>
+    </div>
+
+    <div class="dropdown-panel nested-dropdown" id="dropdown-physique-watani">
+      <div class="sub-items">
+
+        <div class="sub-item" onclick="handleClick(this,'امتحان الفيزياء')">
+          <div class="sub-item-dot dot-blue"></div>
+          <span class="sub-item-label">الفيزياء</span>
+        </div>
+
+        <div class="sub-item" onclick="handleClick(this,'امتحان الرياضيات')">
+          <div class="sub-item-dot dot-purple"></div>
+          <span class="sub-item-label">الرياضيات</span>
+        </div>
+             <div class="sub-item" onclick="handleClick(this,'علوم الحياة والأرض ')">
+          <div class="sub-item-dot dot-purple"></div>
+          <span class="sub-item-label">علوم الحياة والأرض </span>
+        </div>
+
       </div>
-      <div class="nav-item" onclick="setActive(this)">
-        <div class="nav-icon">✏️</div>
-        <span class="nav-text">التوجيه</span>
+    </div>
+
+    <!-- علوم الحياة والأرض -->
+    <div class="sub-item has-dropdown"
+         onclick="event.stopPropagation();toggleDropdown('svt-watani')">
+
+      <div class="sub-item-dot dot-emerald"></div>
+      <span class="sub-item-label">شعبة علوم الحياة والأرض</span>
+      <span class="sub-item-tag tag-emerald">SVT</span>
+    </div>
+
+    <div class="dropdown-panel nested-dropdown" id="dropdown-svt-watani">
+      <div class="sub-items">
+
+        <div class="sub-item" onclick="handleClick(this,'امتحان SVT')">
+          <div class="sub-item-dot dot-emerald"></div>
+          <span class="sub-item-label">علوم الحياة والأرض</span>
+        </div>
+
+        <div class="sub-item" onclick="handleClick(this,'امتحان الفيزياء SVT')">
+          <div class="sub-item-dot dot-blue"></div>
+          <span class="sub-item-label">الفيزياء</span>
+        </div>
+
       </div>
+    </div>
+
+    <!-- علوم رياضية -->
+    <div class="sub-item has-dropdown"
+         onclick="event.stopPropagation();toggleDropdown('math-watani')">
+
+      <div class="sub-item-dot dot-gold"></div>
+      <span class="sub-item-label">شعبة العلوم الرياضية</span>
+      <span class="sub-item-tag tag-gold">Math</span>
+    </div>
+
+    <div class="dropdown-panel nested-dropdown" id="dropdown-math-watani">
+      <div class="sub-items">
+
+        <div class="sub-item" onclick="handleClick(this,'امتحان الرياضيات تحليل')">
+          <div class="sub-item-dot dot-gold"></div>
+          <span class="sub-item-label">التحليل</span>
+        </div>
+
+        <div class="sub-item" onclick="handleClick(this,'امتحان الجبر')">
+          <div class="sub-item-dot dot-purple"></div>
+          <span class="sub-item-label">الجبر</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+      <div class="sub-item" onclick="handleClick(this,'الامتحانات التجريبية')">
+        <div class="sub-item-dot dot-cyan"></div>
+        <span class="sub-item-label">الامتحانات التجريبية</span>
+        <span class="sub-item-tag tag-cyan">تجريبي</span>
+      </div>
+
+<div class="sub-item has-dropdown"
+     onclick="event.stopPropagation();toggleDropdown('mojtamaa-tania')">
+  <div class="sub-item-dot dot-purple"></div>
+  <span class="sub-item-label">مجتمع التلاميذ</span>
+  <span class="sub-item-tag tag-purple">مجتمع</span>
+</div>
+
+<div class="dropdown-panel nested-dropdown" id="dropdown-mojtamaa-tania">
+  <div class="sub-items">
+
+    <div class="sub-item" onclick="handleClick(this,'إضافة الدروس')">
+      <div class="sub-item-dot dot-emerald"></div>
+      <span class="sub-item-label">إضافة الدروس</span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'أسئلتكم')">
+      <div class="sub-item-dot dot-blue"></div>
+      <span class="sub-item-label">أسئلتكم</span>
+    </div>
+
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+<!-- التوجيه -->
+<div class="nav-section">
+
+  <div class="nav-item" id="nav-tawjih" onclick="toggleDropdown('tawjih')">
+    <div class="nav-icon">✏️</div>
+    <span class="nav-text">التوجيه</span>
+    <span class="nav-chevron">›</span>
+  </div>
+
+  <div class="dropdown-panel" id="dropdown-tawjih">
+    <div class="sub-items">
+
+<div class="sub-item has-dropdown"
+     onclick="event.stopPropagation();toggleDropdown('masarat-oula')">
+  <div class="sub-item-dot dot-blue"></div>
+  <span class="sub-item-label">مسارات ما بعد أولى باك</span>
+  <span class="sub-item-tag tag-blue">مسارات</span>
+</div>
+
+<div class="dropdown-panel nested-dropdown" id="dropdown-masarat-oula">
+  <div class="sub-items">
+
+    <div class="sub-item" onclick="handleClick(this,'الخيارات')">
+      <div class="sub-item-dot dot-blue"></div>
+      <span class="sub-item-label">الخيارات</span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'ما الأنسب لك ؟')">
+      <div class="sub-item-dot dot-gold"></div>
+      <span class="sub-item-label">ما الأنسب لك ؟</span>
+    </div>
+
+    <div class="sub-item" onclick="handleClick(this,'مقارنة الشعب')">
+      <div class="sub-item-dot dot-purple"></div>
+      <span class="sub-item-label">مقارنة الشعب</span>
+    </div>
+
+  </div>
+</div>
+
+      <div class="sub-item" onclick="handleClick(this,'آفاق بعد الباك')">
+        <div class="sub-item-dot dot-cyan"></div>
+        <span class="sub-item-label">آفاق بعد الباك</span>
+        <span class="sub-item-tag tag-cyan">مستقبل</span>
+      </div>
+
+      <div class="sub-item" onclick="handleClick(this,'نصائح للتوجيه')">
+        <div class="sub-item-dot dot-gold"></div>
+        <span class="sub-item-label">نصائح للتوجيه</span>
+        <span class="sub-item-tag tag-gold">نصائح</span>
+      </div>
+
+      <div class="sub-item" onclick="handleClick(this,'أسئلة وأجوبة')">
+        <div class="sub-item-dot dot-purple"></div>
+        <span class="sub-item-label">أسئلة وأجوبة</span>
+        <span class="sub-item-tag tag-purple">FAQ</span>
+      </div>
+
+      <div class="sub-item" onclick="handleClick(this,'استشرنا')">
+        <div class="sub-item-dot dot-emerald"></div>
+        <span class="sub-item-label">استشرنا</span>
+        <span class="sub-item-tag tag-emerald">مباشر</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
       <div class="nav-item" onclick="setActive(this)">
         <div class="nav-icon">🤔</div>
         <span class="nav-text">نصائح</span>
@@ -549,14 +935,91 @@ body{font-family:'Cairo',sans-serif;background:var(--bg0);color:var(--text1);pad
     </div>
     <div class="nav-section">
       <div class="nav-label">أخرى</div>
-      <div class="nav-item" onclick="setActive(this)">
-        <div class="nav-icon">🛒</div>
-        <span class="nav-text">المتجر</span>
+
+
+
+<!-- المتجر -->
+<div class="nav-section">
+
+  <div class="nav-item" id="nav-matjar" onclick="toggleDropdown('matjar')">
+    <div class="nav-icon">🛒</div>
+    <span class="nav-text">المتجر</span>
+    <span class="nav-chevron">›</span>
+  </div>
+
+  <div class="dropdown-panel" id="dropdown-matjar">
+    <div class="sub-items">
+
+      <div class="sub-item" onclick="handleClick(this,'كتب أولى باك')">
+        <div class="sub-item-dot dot-blue"></div>
+        <span class="sub-item-label">كتب أولى باك</span>
+        <span class="sub-item-tag tag-blue">أولى</span>
       </div>
-      <div class="nav-item" onclick="setActive(this)">
-        <div class="nav-icon">⚙️</div>
-        <span class="nav-text">الإعدادات</span>
+
+      <div class="sub-item" onclick="handleClick(this,'كتب ثانية باك')">
+        <div class="sub-item-dot dot-purple"></div>
+        <span class="sub-item-label">كتب ثانية باك</span>
+        <span class="sub-item-tag tag-purple">ثانية</span>
       </div>
+
+      <div class="sub-item" onclick="handleClick(this,'آراء التلاميذ')">
+        <div class="sub-item-dot dot-emerald"></div>
+        <span class="sub-item-label">آراء التلاميذ</span>
+        <span class="sub-item-tag tag-emerald">تقييمات</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+      
+<!-- الإعدادات -->
+<div class="nav-section">
+
+  <div class="nav-item" id="nav-settings" onclick="toggleDropdown('settings')">
+    <div class="nav-icon">⚙️</div>
+    <span class="nav-text">الإعدادات</span>
+    <span class="nav-chevron">›</span>
+  </div>
+
+  <div class="dropdown-panel" id="dropdown-settings">
+    <div class="sub-items">
+
+      <div class="sub-item" onclick="handleClick(this,'الحساب الشخصي')">
+        <div class="sub-item-dot dot-blue"></div>
+        <span class="sub-item-label">الحساب الشخصي</span>
+        <span class="sub-item-tag tag-blue">حساب</span>
+      </div>
+
+      <div class="sub-item" onclick="handleClick(this,'الأمان')">
+        <div class="sub-item-dot dot-rose"></div>
+        <span class="sub-item-label">الأمان</span>
+        <span class="sub-item-tag tag-rose">حماية</span>
+      </div>
+
+      <div class="sub-item" onclick="handleClick(this,'واجهة الموقع')">
+        <div class="sub-item-dot dot-purple"></div>
+        <span class="sub-item-label">واجهة الموقع</span>
+        <span class="sub-item-tag tag-purple">تصميم</span>
+      </div>
+
+      <div class="sub-item" onclick="handleClick(this,'المشتريات')">
+        <div class="sub-item-dot dot-gold"></div>
+        <span class="sub-item-label">المشتريات</span>
+        <span class="sub-item-tag tag-gold">Premium</span>
+      </div>
+
+      <div class="sub-item" onclick="handleClick(this,'الدعم والمساعدة')">
+        <div class="sub-item-dot dot-emerald"></div>
+        <span class="sub-item-label">الدعم والمساعدة</span>
+        <span class="sub-item-tag tag-emerald">مساعدة</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
     </div>
   </nav>
   <div class="sidebar-user">
@@ -1082,13 +1545,17 @@ setTimeout(()=>{
 
 
 
-function toggleDropdown(id){
-  const nav=document.getElementById('nav-'+id);
-  const panel=document.getElementById('dropdown-'+id);
-  const isOpen=panel.classList.contains('open');
-  document.querySelectorAll('.dropdown-panel').forEach(p=>p.classList.remove('open'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('open','active'));
-  if(!isOpen){panel.classList.add('open');nav.classList.add('open','active')}
+function toggleDropdown(id) {
+  const dropdown = document.getElementById(`dropdown-${id}`);
+
+  if (!dropdown) return;
+
+  dropdown.classList.toggle('open');
+
+  const nav = document.getElementById(`nav-${id}`);
+  if (nav) {
+    nav.classList.toggle('open');
+  }
 }
 function handleClick(el,name){
   document.querySelectorAll('.sub-item').forEach(s=>{s.style.background='';s.style.color=''});
@@ -1123,6 +1590,8 @@ setTimeout(()=>{
   const xp=document.querySelector('.xp-fill');
   if(xp){xp.style.width='66%'}
 },800);
+
+toggleDropdown('ola');
 </script>
 </body>
 </html>
